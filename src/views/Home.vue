@@ -11,14 +11,14 @@
 
     <v-container fluid class="pa-0 py-0 my-0" >
       <v-row justify="center" align="center">
-        <v-col md="12" sm="11" lg="10" xs="12" class="py-0" :class="this.$vuetify.theme.dark == true?'darkModeContainer':'lightModeContainer'">
+        <v-col md="12" sm="11" lg="10" xs="12" class="py-0" >
           <whatwedo />
         </v-col>
       </v-row>
     </v-container>
 
     <v-container fluid class="pa-0 pt-5 my-0" >
-      <v-row justify="center" align="center" style="background:#4C4A78" class="py-5 my-0">
+      <v-row justify="center" align="center" class="py-5 my-0 about-band">
         <v-col md="12" lg="10" sm="11" xs="12" class="py-0" >
           <AboutCommunity />
         </v-col>
@@ -98,14 +98,7 @@ export default {
 </script>
 
 <style scoped>
-  .lightModeContainer{
-      background-color:#F9F9F9;
-      border:1px solid #e0e0e0;
-      border-radius:5px
-  }
-  .darkModeContainer{
-      background-color:#292929;
-      border:1px solid #212121;
-      border-radius:5px
-  }
+.about-band{
+  background:linear-gradient(135deg,#1a73e8 0%,#174ea6 100%);
+}
 </style>

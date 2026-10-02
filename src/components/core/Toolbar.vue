@@ -18,11 +18,11 @@
           contain
           :src="config.generalConfig.toolbarImage"
           transition="scale-transition"
-          width="25"
+          width="32"
         />
       </router-link>
     </div>
-    <v-toolbar-title class="google-font px-0" style="width:280px">
+    <v-toolbar-title class="google-font px-0" style="min-width:160px">
       <router-link
         to="/"
         class="google-font"
@@ -30,7 +30,7 @@
         style="text-decoration:none;font-size:110%"
         :class="this.$vuetify.theme.dark?'whiteText':'blackText'"
       >
-      {{config.generalConfig.shortName || config.generalConfig.name || ""}}</router-link>
+      {{config.generalConfig.shortName || config.generalConfig.name || "GDG Ludhiana"}}</router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>
 

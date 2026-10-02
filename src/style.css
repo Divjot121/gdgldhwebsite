@@ -41,3 +41,41 @@ body{
     border:1px solid #e0e0e0;
     border-radius:5px
 } */
+
+/* ---------- GDG Ludhiana design system ---------- */
+:root{
+    --g-blue:#4285f4;
+    --g-red:#ea4335;
+    --g-yellow:#fbbc04;
+    --g-green:#34a853;
+    --radius:16px;
+}
+.google-font, body{ font-family: google-sans, Roboto, sans-serif }
+.g-gradient-text{
+    background: linear-gradient(90deg,var(--g-blue),var(--g-red) 35%,var(--g-yellow) 65%,var(--g-green));
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.g-bar{
+    height:4px;
+    background: linear-gradient(90deg,var(--g-blue) 25%,var(--g-red) 25% 50%,var(--g-yellow) 50% 75%,var(--g-green) 75%);
+}
+.section-title{
+    font-size:2rem;
+    font-weight:500;
+    line-height:1.2;
+}
+.card-light,.card-dark,.darkModeCard,.whiteTheme{
+    border-radius:var(--radius) !important;
+    transition:transform .2s ease, box-shadow .2s ease;
+}
+.card-light:hover,.card-dark:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 24px rgba(60,64,67,.15);
+}
+.v-btn{ letter-spacing:0 !important; text-transform:none !important; border-radius:999px !important }
+.v-chip{ font-family: google-sans, Roboto, sans-serif }
+@media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important }
+}
