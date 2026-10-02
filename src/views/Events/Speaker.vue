@@ -35,7 +35,7 @@ import service from "@/services/appservices";
 
 export default {
   components: {
-    LayoutSpeaker: () => import("@/components/CutomEvent/Speakers.vue")
+    LayoutSpeaker: () => import("@/components/CustomEvent/Speakers.vue")
   },
   props: ["eventDetails"],
   data: () => ({

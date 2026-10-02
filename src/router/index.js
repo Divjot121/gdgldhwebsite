@@ -3,198 +3,56 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes = [{
-    path: '/',
-    name: 'Home',
-    component: () => import( /* webpackChunkName: "home" */ '../views/Home.vue'),
-    meta: {
-      title: 'Home ',
-      color: '#0277bd',
-    }
-  },
+const THEME_COLOR = '#0277bd'
+
+// Page route with the shared title/colour meta.
+const page = (path, name, title, component) => ({
+  path,
+  name,
+  component,
+  meta: { title, color: THEME_COLOR }
+})
+
+// Child route of the custom event layout (/events/:id/<path>).
+const eventPage = (path, name, component) => ({
+  path,
+  name,
+  component,
+  meta: { isEvent: true }
+})
+
+const routes = [
+  page('/', 'Home', 'Home', () => import(/* webpackChunkName: "home" */ '../views/Home.vue')),
+  page('/about', 'About', 'About', () => import(/* webpackChunkName: "about" */ '../views/About.vue')),
+  page('/team', 'Team', 'Team', () => import(/* webpackChunkName: "team" */ '../views/Team.vue')),
+  page('/team/:id', 'Team Details', 'Team Details', () => import(/* webpackChunkName: "team-details" */ '../views/Team/TeamDetails.vue')),
+  page('/events', 'Events', 'Events', () => import(/* webpackChunkName: "events" */ '../views/Events.vue')),
   {
-    path: '/about',
-    name: 'About',
-    component: () => import( /* webpackChunkName: "about" */ '../views/About.vue'),
-    meta: {
-      title: 'About ',
-      color: '#0277bd',
-    }
-  },
-  {
-    path: '/team',
-    name: 'Team',
-    component: () => import( /* webpackChunkName: "team" */ '../views/Team.vue'),
-    meta: {
-      title: 'Team ',
-      color: '#0277bd',
-    }
-  },
-  {
-    path: '/team/:id',
-    name: 'Team Details',
-    component: () => import( /* webpackChunkName: "team-details" */ '../views/Team/TeamDetails.vue'),
-    meta: {
-      title: 'Team Details',
-      color: '#0277bd',
-    }
-  },
-  {
-    path: '/events',
-    name: 'Events',
-    component: () => import( /* webpackChunkName: "events" */ '../views/Events.vue'),
-    meta: {
-      title: 'Events ',
-      color: '#0277bd',
-    }
-  },
-  // {
-  //   path: '/events/:id',
-  //   name: 'Events-Details',
-  //   component: () => import( /* webpackChunkName: "events-details" */ '../views/Events/EventDetails.vue'),
-  //   meta: {
-  //     title: 'Events ',
-  //     color: '#0277bd',
-  //   }
-  // },
-  {
-    path:'/events/:id',
-    name:'CustomEvent',
-    component:()=>import( /* webpackChunkName: "CustomEvent" */ '../views/Events/MainView.vue'),
+    path: '/events/:id',
+    name: 'CustomEvent',
+    component: () => import(/* webpackChunkName: "custom-event" */ '../views/Events/MainView.vue'),
     children: [
-      {
-        // when /event/:id/ is matched
-        path: 'about',
-        name:"CustomEventHome",
-        component: ()=> import(/* webpackChunkName: "CustomEventAbout" */ '../views/Events/About.vue'),
-        meta: {
-          isEvent:true
-        }
-      },
-      {
-        // when /event/:id/ is matched
-        path: 'speakers',
-        name:"CustomEventSpeaker",
-        component: ()=> import(/* webpackChunkName: "CustomEventSpeaker" */ '../views/Events/Speaker.vue'),
-        meta: {
-          isEvent:true
-        }
-      },
-      {
-        // when /event/:id/ is matched
-        path: 'team',
-        name:"CustomEventTeam",
-        component: ()=> import(/* webpackChunkName: "CustomEventTeam" */ '../views/Events/Team.vue'),
-        meta: {
-          isEvent:true
-        }
-      },
-      {
-        // when /event/:id/ is matched
-        path: 'schedule',
-        name:"CustomEventSchedule",
-        component: ()=> import(/* webpackChunkName: "CustomEventSchedule" */ '../views/Events/Schedule.vue'),
-        meta: {
-          isEvent:true
-        }
-      },
-      {
-        // when /event/:id/ is matched
-        path: 'partners',
-        name:"CustomEventPartners",
-        component: ()=> import(/* webpackChunkName: "CustomEventPartners" */ '../views/Events/Partners.vue'),
-        meta: {
-          isEvent:true
-        }
-      },
-      {
-        path: '',
-        name: 'redirectCustomEvent',
-        redirect: {
-          path: 'about'
-        },
-        meta: {
-          isEvent:true
-        }
-      },
+      { path: '', name: 'redirectCustomEvent', redirect: { path: 'about' }, meta: { isEvent: true } },
+      eventPage('about', 'CustomEventHome', () => import(/* webpackChunkName: "custom-event-about" */ '../views/Events/About.vue')),
+      eventPage('speakers', 'CustomEventSpeaker', () => import(/* webpackChunkName: "custom-event-speaker" */ '../views/Events/Speaker.vue')),
+      eventPage('team', 'CustomEventTeam', () => import(/* webpackChunkName: "custom-event-team" */ '../views/Events/Team.vue')),
+      eventPage('schedule', 'CustomEventSchedule', () => import(/* webpackChunkName: "custom-event-schedule" */ '../views/Events/Schedule.vue')),
+      eventPage('partners', 'CustomEventPartners', () => import(/* webpackChunkName: "custom-event-partners" */ '../views/Events/Partners.vue'))
     ]
   },
-  {
-    path: '/speakers',
-    name: 'Speakers',
-    component: () => import( /* webpackChunkName: "speakers" */ '../views/Speakers.vue'),
-    meta: {
-      title: 'Speakers ',
-      color: '#0277bd',
-    }
-  },
-  {
-    path: '/speakers/:id',
-    name: 'Speakers-Details',
-    component: () => import( /* webpackChunkName: "speakers-details" */ '../views/Speakers/SpeakerDetails.vue'),
-    meta: {
-      title: 'Speakers ',
-      color: '#0277bd',
-    }
-  },
-  {
-    path: '/volunteers',
-    name: 'Volunteers',
-    component: () => import( /* webpackChunkName: "volunteer" */ '../views/Volunteer.vue'),
-    meta: {
-      title: 'Volunteers ',
-      color: '#0277bd',
-    }
-  },
-  {
-    path: '/partners',
-    name: 'Partners',
-    component: () => import( /* webpackChunkName: "partners" */ '../views/Partners.vue'),
-    meta: {
-      title: 'Partners ',
-      color: '#0277bd',
-    }
-  },
-  {
-    path: '/contact',
-    name: 'Contact',
-    component: () => import( /* webpackChunkName: "contact" */ '../views/Contact.vue'),
-    meta: {
-      title: 'Contact ',
-      color: '#0277bd',
-    }
-  },
-  {
-    path: '/blogs',
-    name: 'Blogs',
-    component: () => import( /* webpackChunkName: "blogs" */ '../views/Blogs.vue'),
-    meta: {
-      title: 'Blogs ',
-      color: '#0277bd',
-    }
-  },
-  {
-    path: '*',
-    name: 'redirect',
-    redirect: {
-      path: '/'
-    },
-    meta: {
-      title: `Redirect `,
-      color: "#0277bd",
-    }
-  },
+  page('/speakers', 'Speakers', 'Speakers', () => import(/* webpackChunkName: "speakers" */ '../views/Speakers.vue')),
+  page('/speakers/:id', 'Speakers-Details', 'Speaker Details', () => import(/* webpackChunkName: "speakers-details" */ '../views/Speakers/SpeakerDetails.vue')),
+  page('/volunteers', 'Volunteers', 'Volunteers', () => import(/* webpackChunkName: "volunteer" */ '../views/Volunteer.vue')),
+  page('/partners', 'Partners', 'Partners', () => import(/* webpackChunkName: "partners" */ '../views/Partners.vue')),
+  page('/contact', 'Contact', 'Contact', () => import(/* webpackChunkName: "contact" */ '../views/Contact.vue')),
+  page('/blogs', 'Blogs', 'Blogs', () => import(/* webpackChunkName: "blogs" */ '../views/Blogs.vue')),
+  { path: '*', name: 'redirect', redirect: '/' }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior() {
-    return {
-      x: 0,
-      y: 0
-    };
-  },
+  scrollBehavior: () => ({ x: 0, y: 0 }),
   routes
 })
 
